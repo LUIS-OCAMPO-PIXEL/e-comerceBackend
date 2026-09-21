@@ -113,10 +113,42 @@ const eliminarUsuario = async (req, res) => {
   }
 };
 
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email y contraseña son obligatorios' });
+    }
+
+    const usuario = await usuarioModel.obtenerUsuarioPorEmail(email.trim().toLowerCase());
+
+    if (!usuario) {
+      // Mensaje genérico a propósito: no revelamos si el problema fue el email o el password
+      return res.status(401).json({ error: 'Credenciales inválidas' });
+    }
+
+    const passwordValido = await bcrypt.compare(password, usuario.password);
+
+    if (!passwordValido) {
+      return res.status(401).json({ error: 'Credenciales inválidas' });
+    }
+
+    // Nunca devolver el hash del password al cliente
+    const { password: _, ...usuarioSinPassword } = usuario;
+
+    res.status(200).json(usuarioSinPassword);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al iniciar sesión' });
+  }
+};
 module.exports = {
   listarUsuarios,
   obtenerUsuario,
   crearUsuario,
   actualizarUsuario,
   eliminarUsuario,
+   login,
 };
