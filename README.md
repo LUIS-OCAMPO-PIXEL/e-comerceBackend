@@ -176,6 +176,7 @@ ecomerce-backend/
 - **Consultas parametrizadas (`$1`, `$2`...)** en todas las queries, previniendo SQL Injection.
 - **Contraseñas nunca expuestas**: se excluyen explícitamente en los `SELECT`, y se comparan con `bcrypt.compare` en el login, nunca en texto plano.
 
-## Autor
+## Autor 
+luis alberto ocampo camacho
 
 Proyecto desarrollado como parte de un proceso de preparación para roles de desarrollo backend/full stack.
