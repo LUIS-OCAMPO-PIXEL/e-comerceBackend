@@ -179,4 +179,3 @@ ecomerce-backend/
 ## Autor 
 luis alberto ocampo camacho
 
-Proyecto desarrollado como parte de un proceso de preparación para roles de desarrollo backend/full stack.
