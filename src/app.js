@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors'); 
 const categoriaRoutes = require('./routes/categoriaRoutes');
 const productoRoutes = require('./routes/productoRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
@@ -8,6 +8,7 @@ const chatRoutes = require('./routes/chatRoutes');
 const pool = require('./config/db');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.get('/health', async (req, res) => {
